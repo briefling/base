@@ -28,3 +28,4 @@ Node.js 22.13 or later.
 
 [GNU AGPL v3](LICENSE) (`AGPL-3.0-only`), and a commercial licence from the copyright holder (opcode) for those who
 cannot take the AGPL obligations. See [CONTRIBUTING.md](CONTRIBUTING.md) before sending a change.
+
