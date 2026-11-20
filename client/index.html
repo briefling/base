@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>briefling</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- relative on purpose: at /a/<token>/ (a pinned applet's own app, protocol/pinapp.ts) it is that applet's manifest -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#e5dfd4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="briefling">
+<meta name="mobile-web-app-capable" content="yes">
+<!-- iOS installed app: without these two, iOS 26 lays the page under the status bar and blurs its top edge over the header. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="/style.css">
+<script type="module" src="/app.js"></script>
+</head>
+<body>
+<!-- iOS installed app: fixed opaque cap at the top edge (style.css .topcap), shown only under html.ios-app. -->
+<div class="topcap" aria-hidden="true"></div>
+<!-- Splash: static so it animates before app.js loads (CSS only, no inline style: CSP). Inside #app on purpose: a stale cached app.js
+     replaces it on its first render (never stuck); the current one moves it out of #app first, then takes it down (client/src/boot.ts). -->
+<div id="app"><div id="splash" class="splash" role="status" aria-live="polite">
+<svg class="cup" viewBox="0 0 24 24" width="72" height="72" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path class="steam s1" d="M6 2v2"/><path class="steam s2" d="M10 2v2"/><path class="steam s3" d="M14 2v2"/>
+<path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/>
+</svg>
+<div class="word">brief<span>ling</span></div>
+<div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="msg"></div>
+</div></div>
+</body>
+</html>

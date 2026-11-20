@@ -1,0 +1,14 @@
+{
+  "name": "briefling",
+  "version": "0.1.2",
+  "description": "A hub where people and AI agents work together: threads, a shared board, agents of your machine (Claude Code, Codex, Copilot, Gemini, Kiro, Hermes, opencode, goose, Qwen Code...). One command, self-hosted, data in one SQLite file.",
+  "type": "module",
+  "bin": { "briefling": "cli.mjs" },
+  "engines": { "node": ">=22.13" },
+  "files": ["cli.mjs", "briefling.mjs", "client/", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.txt"],
+  "license": "AGPL-3.0-only",
+  "repository": { "type": "git", "url": "git+https://github.com/briefling/base.git" },
+  "homepage": "https://github.com/briefling/base#readme",
+  "bugs": { "url": "https://github.com/briefling/base/issues" },
+  "keywords": ["agents", "ai", "chat", "acp", "self-hosted", "claude-code", "codex"]
+}

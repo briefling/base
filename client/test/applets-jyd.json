@@ -1,0 +1,368 @@
+{
+ "memoire": {
+  "name": "Mémoire technique pivot (devis Aisco)",
+  "agent": "gideon",
+  "emoji": "📄",
+  "description": "Mémoire technique Word d'un projet pivot WESTERN, à partir du devis Aisco, du devis AQUARIA et de la vue satellite.",
+  "instruction": "Charge d'abord le skill aquaria-memoires et suis-le (instruction complète inchangée, hors champs).",
+  "fields": [
+   {
+    "id": "devis",
+    "label": "Devis client Aisco",
+    "kind": "file",
+    "accept": [
+     "pdf"
+    ],
+    "required": true,
+    "hint": "Le « Customer Quote » généré par Aisco Workspace, tel quel."
+   },
+   {
+    "id": "devis_aquadoc",
+    "label": "Devis AQUARIA au client",
+    "kind": "file",
+    "accept": [
+     "pdf"
+    ],
+    "hint": "Pour le client exact, les parcelles, le pompage, le réseau et le chapitre Offre financière."
+   },
+   {
+    "id": "carte",
+    "label": "Capture satellite de la zone",
+    "kind": "file",
+    "accept": [
+     "image"
+    ],
+    "hint": "Sans les pivots. Je hachure les parcelles concernées."
+   },
+   {
+    "id": "parcelles",
+    "label": "Parcelles à hachurer",
+    "kind": "text",
+    "showIf": {
+     "field": "carte",
+     "filled": true
+    },
+    "placeholder": "parcelle 1 au nord du chemin, parcelle 4 au sud"
+   },
+   {
+    "id": "remarques",
+    "label": "Remarques",
+    "kind": "textarea",
+    "hint": "Objectifs du client, alimentation électrique et en eau, tracé du réseau, ou une correction à faire."
+   },
+   {
+    "id": "modele",
+    "label": "Nouveau modèle Word",
+    "kind": "file",
+    "accept": [
+     "word"
+    ],
+    "advanced": true,
+    "hint": "Il remplace l'ancien pour ce mémoire et les suivants (l'ancien est gardé)."
+   }
+  ]
+ },
+ "chute": {
+  "name": "Chute de tension câble",
+  "agent": "gideon",
+  "emoji": "⚡",
+  "description": "Chute de tension d'un câble alu enterré ou cuivre R2V, en 230 V ou 400 V, pour toutes les sections.",
+  "instruction": "Calcule la chute de tension d'un câble à partir des champs tension, intensite, longueur, matiere et section (instruction complète inchangée).",
+  "fields": [
+   {
+    "id": "tension",
+    "label": "Tension",
+    "kind": "select",
+    "options": [
+     "400 V triphasé",
+     "230 V monophasé"
+    ],
+    "required": true
+   },
+   {
+    "id": "intensite",
+    "label": "Intensité",
+    "kind": "number",
+    "unit": "A",
+    "min": 0.1,
+    "required": true,
+    "placeholder": "50"
+   },
+   {
+    "id": "longueur",
+    "label": "Longueur du câble",
+    "kind": "number",
+    "unit": "m",
+    "min": 1,
+    "required": true,
+    "placeholder": "200"
+   },
+   {
+    "id": "matiere",
+    "label": "Matière",
+    "kind": "select",
+    "options": [
+     "Alu enterré",
+     "Cuivre R2V"
+    ],
+    "required": true
+   },
+   {
+    "id": "section",
+    "label": "Section envisagée",
+    "kind": "number",
+    "unit": "mm²",
+    "min": 0.5,
+    "hint": "Vide : toutes les sections"
+   }
+  ]
+ },
+ "busage": {
+  "name": "Busage pivot",
+  "agent": "gideon",
+  "emoji": "💧",
+  "description": "Tableau de busage Word d'un pivot : buse à chaque sortie, pressions, matériel, temps de tour et dose (Komet KPT, Senninger i-Wob, Nelson A3030/R3030).",
+  "instruction": "Charge d'abord le skill aquaria-memoires (partie « Pivot nozzle sizing ») (instruction complète, options --canon et --nom lues des champs).",
+  "fields": [
+   {
+    "id": "travees",
+    "label": "Nombre de travées",
+    "kind": "number",
+    "integer": true,
+    "min": 1,
+    "max": 30,
+    "required": true,
+    "placeholder": "7"
+   },
+   {
+    "id": "inegales",
+    "label": "Travées de longueurs différentes",
+    "kind": "checkbox"
+   },
+   {
+    "id": "longueur",
+    "label": "Longueur d'une travée",
+    "kind": "number",
+    "unit": "m",
+    "min": 1,
+    "required": true,
+    "placeholder": "52,8",
+    "showIf": {
+     "field": "inegales",
+     "filled": false
+    }
+   },
+   {
+    "id": "longueurs",
+    "label": "Longueur de chaque travée",
+    "kind": "list",
+    "of": "number",
+    "unit": "m",
+    "min": 1,
+    "required": true,
+    "placeholder": "52,8",
+    "showIf": {
+     "field": "inegales",
+     "filled": true
+    },
+    "hint": "Dans l'ordre, du centre vers le bout."
+   },
+   {
+    "id": "sorties",
+    "label": "Espacement entre 2 sorties sur la travée",
+    "kind": "number",
+    "unit": "m",
+    "min": 0.1,
+    "required": true,
+    "hint": "Dépend de la marque du pivot : 1,5 sur un WESTERN."
+   },
+   {
+    "id": "ecart",
+    "label": "Écartement souhaité entre arroseurs",
+    "kind": "list",
+    "of": "number",
+    "unit": "m",
+    "min": 0.1,
+    "required": true,
+    "hint": "Un multiple de l'espacement des sorties. Une valeur par travée si besoin : la dernière vaut jusqu'au bout."
+   },
+   {
+    "id": "porte_a_faux",
+    "label": "Longueur du porte-à-faux",
+    "kind": "number",
+    "unit": "m",
+    "min": 0,
+    "hint": "Vide s'il n'y en a pas."
+   },
+   {
+    "id": "arroseur",
+    "label": "Type d'arroseur",
+    "kind": "select",
+    "required": true,
+    "options": [
+     "Komet KPT",
+     "Senninger i-Wob UP3 (tête en bas)",
+     "Nelson A3030 Accelerator",
+     "Nelson R3030 Rotator"
+    ]
+   },
+   {
+    "id": "regulateur",
+    "label": "Pression des régulateurs",
+    "kind": "select",
+    "required": true,
+    "options": [
+     {
+      "label": "0,4 bar (6 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Senninger i-Wob UP3 (tête en bas)",
+        "Nelson A3030 Accelerator"
+       ]
+      }
+     },
+     {
+      "label": "0,7 bar (10 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Senninger i-Wob UP3 (tête en bas)",
+        "Nelson A3030 Accelerator"
+       ]
+      }
+     },
+     {
+      "label": "1,0 bar (15 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Senninger i-Wob UP3 (tête en bas)",
+        "Nelson A3030 Accelerator"
+       ]
+      }
+     },
+     {
+      "label": "1,4 bar (20 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Nelson R3030 Rotator"
+       ]
+      }
+     },
+     {
+      "label": "1,7 bar (25 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Nelson R3030 Rotator"
+       ]
+      }
+     },
+     {
+      "label": "2,1 bar (30 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Nelson R3030 Rotator"
+       ]
+      }
+     },
+     {
+      "label": "2,8 bar (40 psi)",
+      "showIf": {
+       "field": "arroseur",
+       "in": [
+        "Komet KPT",
+        "Nelson R3030 Rotator"
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "id": "debit",
+    "label": "Débit total consommé par le pivot",
+    "kind": "number",
+    "unit": "m³/h",
+    "min": 0.1,
+    "required": true,
+    "hint": "Canon compris s'il y en a un."
+   },
+   {
+    "id": "canon",
+    "label": "Débit du canon",
+    "kind": "number",
+    "unit": "m³/h",
+    "min": 0.1,
+    "hint": "Vide s'il n'y a pas de canon."
+   },
+   {
+    "id": "pression",
+    "label": "Pression à l'entrée du pivot, au coude",
+    "kind": "number",
+    "unit": "bar",
+    "min": 0.1,
+    "required": true,
+    "placeholder": "2"
+   },
+   {
+    "id": "nom",
+    "label": "Nom du pivot ou du client",
+    "kind": "text"
+   },
+   {
+    "id": "roues",
+    "label": "Type de roues",
+    "kind": "select",
+    "options": [
+     "14.9 x 24",
+     "14.9 x 28",
+     "11.2 x 24",
+     "16.9 x 24",
+     "11.2 x 38"
+    ],
+    "advanced": true,
+    "hint": "Pour le temps de tour et la dose."
+   },
+   {
+    "id": "moteur",
+    "label": "Vitesse du motoréducteur",
+    "kind": "text",
+    "unit": "tr/min",
+    "placeholder": "39/44",
+    "advanced": true,
+    "showIf": {
+     "field": "roues",
+     "filled": true
+    },
+    "hint": "À 50 Hz / 60 Hz."
+   },
+   {
+    "id": "reducteur",
+    "label": "Rapport du réducteur de roue",
+    "kind": "text",
+    "placeholder": "52:1",
+    "advanced": true,
+    "showIf": {
+     "field": "roues",
+     "filled": true
+    }
+   },
+   {
+    "id": "autres",
+    "label": "Autres précisions",
+    "kind": "textarea",
+    "advanced": true,
+    "hint": "Dénivelé, tubes autres que 6\"5/8, sorties bouchées au centre…"
+   }
+  ]
+ }
+}

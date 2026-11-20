@@ -1,0 +1,5 @@
+node_modules/
+.cache/
+client/dist/
+client/dist-preview/
+data/
